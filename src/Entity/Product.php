@@ -42,10 +42,6 @@ class Product
      */
     private $with_tax_price;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getName(): ?string
     {
