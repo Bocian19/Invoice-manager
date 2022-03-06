@@ -10,3 +10,19 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+window.addEventListener('DOMContentLoaded', () => {
+
+    let net_price = document.getElementById("product_net_price");
+    let tax = document.getElementById("product_tax");
+    let with_tax_price = document.getElementById("product_with_tax_price");
+
+    net_price.addEventListener('change', ()=> {
+        with_tax_price.value = tax.value * net_price.value;
+    })
+    tax.addEventListener('change', ()=> {
+        with_tax_price.value = tax.value * net_price.value;
+    })
+
+
+});
