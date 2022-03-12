@@ -23,7 +23,7 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $quantity;
 
@@ -33,7 +33,7 @@ class Product
     private $net_price;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $tax;
 

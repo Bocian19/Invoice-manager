@@ -8,6 +8,7 @@ use App\Entity\Product;
 use App\Form\Type\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,11 +20,12 @@ class ProductController extends AbstractController
      * @return Response
      * @Route("/", name="add-product")
      */
-    public function new(EntityManagerInterface $entityManager): Response
+    public function new(EntityManagerInterface $entityManager, Request $request): Response
     {
         $product = new Product();
 
         $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 

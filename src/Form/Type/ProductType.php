@@ -21,7 +21,9 @@ class ProductType extends AbstractType
     $builder
     ->add('name', TextType::class)
     ->add('quantity', IntegerType::class)
-    ->add('net_price', NumberType::class)
+    ->add('net_price', NumberType::class, [
+        "scale" => 2,
+    ])
     ->add('tax', ChoiceType::class, [
         'choices'  => [
             '0%' => 1,
@@ -30,15 +32,18 @@ class ProductType extends AbstractType
             '23%' => 1.23,
         ],
     ])
-    ->add('with_tax_price', NumberType::class)
+    ->add('with_tax_price', NumberType::class, [
+        "scale" => 2,
+
+    ])
     ->add('save', SubmitType::class)
     ;
     }
 
-//    public function configureOptions(OptionsResolver $resolver): void
-//    {
-//        $resolver->setDefaults([
-//            'data_class' => Product::class,
-//        ]);
-//    }
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Product::class,
+        ]);
+    }
 }

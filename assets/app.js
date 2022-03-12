@@ -18,11 +18,16 @@ window.addEventListener('DOMContentLoaded', () => {
     let with_tax_price = document.getElementById("product_with_tax_price");
 
     net_price.addEventListener('change', ()=> {
-        with_tax_price.value = tax.value * net_price.value;
+        with_tax_price.value = parseFloat(tax.value * net_price.value);
+
+        console.log(typeof(net_price.value));
+        console.log(typeof(with_tax_price.value));
     })
     tax.addEventListener('change', ()=> {
-        with_tax_price.value = tax.value * net_price.value;
-    })
+        with_tax_price.value = parseFloat(tax.value * net_price.value);
 
+        console.log(typeof(net_price.value));
+        console.log(typeof(with_tax_price.value));
+    })
 
 });
