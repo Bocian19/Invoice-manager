@@ -79,12 +79,12 @@ class Product
         return $this;
     }
 
-    public function getTax(): ?int
+    public function getTax(): float
     {
         return $this->tax;
     }
 
-    public function setTax(int $tax): self
+    public function setTax(float $tax): self
     {
         $this->tax = $tax;
 

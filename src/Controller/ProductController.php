@@ -7,6 +7,7 @@ use App\Entity\Product;
 
 use App\Form\Type\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,12 +46,20 @@ class ProductController extends AbstractController
     /**
      * @Route("/products_list", name="products_list")
      */
-    public function list(): Response
+    public function list(ManagerRegistry $doctrine): Response
     {
+        $products = $doctrine->getRepository(Product::class)->findAll();
 
-        return $this->render('product/list.html.twig');
+        if (!$products) {
+            throw $this->createNotFoundException(
+                'No products found'
+            );
+        }
+
+        return $this->render('product/list.html.twig', [
+            'products' => $products
+            ]);
+
+
     }
-
-
-
 }

@@ -2,4 +2,26 @@
 
 {% block body %}
 <h1>Lista ptoduktów</h1>
+    <table>
+        <th>Name</th><th>Quantity</th><th>Net price</th><th>Tax rate</th><th>With tax price</th>
+    {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td><td>{{ product.quantity }}</td><td>{{ product.netPrice }}</td>
+            {% if product.tax is same as (1.0) %}
+                <td>0 %</td>
+            {% elseif product.tax is same as (1.05) %}
+                <td>5 %</td>
+            {% elseif product.tax is same as (1.08) %}
+                <td>8 %</td>
+            {% elseif product.tax is same as (1.23) %}
+                <td>23 %</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td>{{ product.withTaxPrice }}</td>
+
+        </tr>
+    {% endfor %}
+    </table>
+
 {% endblock %}

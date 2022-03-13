@@ -26,11 +26,12 @@ class ProductType extends AbstractType
     ])
     ->add('tax', ChoiceType::class, [
         'choices'  => [
-            '0%' => 1,
+            '0%' => 1.0,
             '5%' => 1.05,
             '8%' => 1.08,
             '23%' => 1.23,
         ],
+
     ])
     ->add('with_tax_price', NumberType::class, [
         "scale" => 2,
