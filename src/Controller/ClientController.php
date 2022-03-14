@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Product;
-
-use App\Form\Type\ProductType;
+use App\Entity\Client;
+use App\Form\Type\ClientType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,54 +11,54 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-class ProductController extends AbstractController
+class ClientController extends AbstractController
 {
     /**
      * @param EntityManagerInterface $entityManager
      * @param Request $request
      * @return Response
-     * @Route("/", name="add-product")
+     * @Route("/add-client", name="add-client")
      */
     public function new(EntityManagerInterface $entityManager, Request $request): Response
     {
-        $product = new Product();
+        $client = new Client();
 
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $product = $form->getData();
-            $entityManager->persist($product);
+            $client = $form->getData();
+            $entityManager->persist($client);
             $entityManager->flush();
 
-            return $this->redirectToRoute('products_list');
+            return $this->redirectToRoute('clients_list');
         }
 
-        return $this->renderForm('product/new.html.twig', [
+        return $this->renderForm('client/new.html.twig', [
             'form' => $form,
         ]);
 
     }
 
     /**
-     * @Route("/products_list", name="products_list")
+     * @Route("/clients_list", name="clients_list")
      */
     public function list(ManagerRegistry $doctrine): Response
     {
-        $products = $doctrine->getRepository(Product::class)->findAll();
+        $clients = $doctrine->getRepository(Client::class)->findAll();
 
-        if (!$products) {
+        if (!$clients) {
             throw $this->createNotFoundException(
-                'No products found'
+                'No clients found'
             );
         }
 
-        return $this->render('product/list.html.twig', [
-            'products' => $products
-            ]);
+        return $this->render('client/list.html.twig', [
+            'clients' => $clients
+        ]);
 
 
     }
+
 }
